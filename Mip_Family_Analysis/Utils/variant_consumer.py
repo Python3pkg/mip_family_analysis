@@ -75,7 +75,7 @@ class VariantConsumer(multiprocessing.Process):
             if 'AR_comp' in model_list:
                 if len(model_list) == 1:
                     variant_dict[variant_id]['Rank_score'] = min(variant_dict[variant_id]['Individual_rank_score'], 
-                            max([value for value in variant_dict[variant_id]['Compounds'].values()]))
+                            max([value for value in list(variant_dict[variant_id]['Compounds'].values())]))
                 
             if len(compounds_list) > 0:
                 variant_dict[variant_id]['Compounds'] = ':'.join(compounds_list)
@@ -93,7 +93,7 @@ class VariantConsumer(multiprocessing.Process):
         """Run the consuming"""
         proc_name = self.name
         if self.verbosity:
-            print('%s Starting!' % proc_name)
+            print(('%s Starting!' % proc_name))
         while True:
             # A batch is a dictionary on the form {gene_1:{variant_id:variant_dict}, gene_2:{variant_id:variant_dict}}
             next_batch = self.task_queue.get()
@@ -105,7 +105,7 @@ class VariantConsumer(multiprocessing.Process):
             if next_batch is None:
                 self.task_queue.task_done()
                 if self.verbosity:
-                    print('%s: Exiting' % proc_name)
+                    print(('%s: Exiting' % proc_name))
                 break
             genetic_models.check_genetic_models(next_batch, self.family, self.verbosity, proc_name = proc_name)
             fixed_variants = self.fix_variants(next_batch)

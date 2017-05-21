@@ -55,8 +55,8 @@ class VariantFileParser(object):
                         nr_of_variants += 1
                         new_chrom = variant['Chromosome']
                         if nr_of_variants % 20000 == 0:
-                            print('%s variants parsed!' % str(nr_of_variants))
-                            print('Last 20.000 took %s to parse. \n' % str(datetime.now() - start_twenty))
+                            print(('%s variants parsed!' % str(nr_of_variants)))
+                            print(('Last 20.000 took %s to parse. \n' % str(datetime.now() - start_twenty)))
                             start_twenty = datetime.now()
                     # If we look at the first variant, setup boundary conditions:
                     if beginning:
@@ -89,15 +89,15 @@ class VariantFileParser(object):
                     
                     if self.verbosity:
                         if new_chrom != current_chrom:
-                            print('Chromosome %s parsed!' % current_chrom)
-                            print('Time to parse chromosome %s' % str(datetime.now()-start_chrom))
+                            print(('Chromosome %s parsed!' % current_chrom))
+                            print(('Time to parse chromosome %s' % str(datetime.now()-start_chrom)))
                             current_chrom = new_chrom
                             start_chrom = datetime.now()
                         
         if self.verbosity:
-            print('Chromosome %s parsed!' % current_chrom)
-            print('Time to parse chromosome %s \n' % str(datetime.now()-start_chrom))
-            print('Variants done!. Time to parse variants: %s \n' % str(datetime.now() - start_parsing))
+            print(('Chromosome %s parsed!' % current_chrom))
+            print(('Time to parse chromosome %s \n' % str(datetime.now()-start_chrom)))
+            print(('Variants done!. Time to parse variants: %s \n' % str(datetime.now() - start_parsing)))
         self.batch_queue.put(batch)
         
         return
@@ -137,7 +137,7 @@ class VariantFileParser(object):
     def cmms_variant(self, splitted_variant_line, individuals):
         """Returns a variant object in the cmms format."""
         
-        variant = dict(zip(self.header_line, splitted_variant_line))
+        variant = dict(list(zip(self.header_line, splitted_variant_line)))
         
         # Get the genes:
         features_overlapped = self.get_genes(variant['HGNC_symbol'], 'HGNC')

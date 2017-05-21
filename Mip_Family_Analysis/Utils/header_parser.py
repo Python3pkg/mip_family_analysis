@@ -108,11 +108,11 @@ def main():
     try:
         my_parser.add_header('Rank_score')
     except SyntaxError:
-        print 'Must specify the new header in metadata first'
+        print('Must specify the new header in metadata first')
     else:
         for line in my_parser.get_headers_for_print():
-            print line
-        print my_parser.header
+            print(line)
+        print(my_parser.header)
     # print '\t'.join(my_parser.header)
     # print my_parser.line_counter
     # print my_parser.individuals

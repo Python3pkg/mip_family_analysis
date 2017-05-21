@@ -32,7 +32,7 @@ class VariantPrinter(multiprocessing.Process):
         number_of_finished = 0
         proc_name = self.name
         if self.verbosity:
-            print('%s starting!' % proc_name)
+            print(('%s starting!' % proc_name))
         while True:
             next_result = self.task_queue.get()
             if self.verbosity:
@@ -49,7 +49,7 @@ class VariantPrinter(multiprocessing.Process):
                         print_line = [next_result[variant_id].get(entry, '-') for entry in self.header]
                         self.outfile.write('\t'.join(print_line) + '\n')
                     except TypeError as e:
-                        print(next_result[variant_id])
+                        print((next_result[variant_id]))
                         print(e)
         return
 

@@ -82,17 +82,17 @@ def print_headers(args, header_object):
                 f.write(line + '\n')
     elif not args.silent:
         for line in lines_to_print:
-            print line
+            print(line)
     return
 
 def check_individuals(family, head, args):
     """Check if the individuals from pedfile is present in varfile"""
-    for individual in family.individuals.keys():
+    for individual in list(family.individuals.keys()):
         if individual not in head.individuals:
             family.individuals.pop(individual, 0)
             if args.verbose:
-                print('Warning! Individual %s is in .ped file but not in variant file! Removing individual from analysis.' 
-                        % individual)
+                print(('Warning! Individual %s is in .ped file but not in variant file! Removing individual from analysis.' 
+                        % individual))
     return
 
 def main():
@@ -164,15 +164,15 @@ def main():
     temp_file = NamedTemporaryFile(delete=False)
     
     if args.verbose:
-        print('Temp files: %s' % temp_file.name)
+        print(('Temp files: %s' % temp_file.name))
     
     num_model_checkers = (cpu_count()*2-1)
 
     if args.verbose:
-        print ('Number of cpus: %s' % str(cpu_count()))
+        print(('Number of cpus: %s' % str(cpu_count())))
     
     model_checkers = [variant_consumer.VariantConsumer(variant_queue, results, my_family, args.verbose) 
-                        for i in xrange(num_model_checkers)]
+                        for i in range(num_model_checkers)]
     
     for w in model_checkers:
         w.start()
@@ -184,7 +184,7 @@ def main():
     var_parser = variant_parser.VariantFileParser(var_file, variant_queue, head, args.verbose)
     var_parser.parse()            
     
-    for i in xrange(num_model_checkers):
+    for i in range(num_model_checkers):
         variant_queue.put(None)
     
     variant_queue.join()
@@ -204,8 +204,8 @@ def main():
     os.remove(temp_file.name)
     
     if args.verbose:
-        print('Variants sorted!. Time to sort variants: %s \n' % str(datetime.now() - start_time_variant_sorting))
-        print('Total time for analysis: %s' % str(datetime.now() - start_time_analysis))
+        print(('Variants sorted!. Time to sort variants: %s \n' % str(datetime.now() - start_time_variant_sorting)))
+        print(('Total time for analysis: %s' % str(datetime.now() - start_time_analysis)))
     
 
 

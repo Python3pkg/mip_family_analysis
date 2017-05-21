@@ -45,7 +45,7 @@ class TestIndividual(object):
     
     def test_add_genotype(self):
         """Test if the adding of genotypes works well."""
-        for variant_id, genotype in self.daughter_genotypes.items():
+        for variant_id, genotype in list(self.daughter_genotypes.items()):
             self.daughter.add_genotype(variant_id, genotype)
         assert len(self.daughter.genotypes) == 2
     

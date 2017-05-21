@@ -20,7 +20,7 @@ class Pair_Generator(object):
         super(Pair_Generator, self).__init__()
         if len(list_of_objects) < 2:
             #TODO raise a proper exception here
-            print 'List must include at least 2 objects!'
+            print('List must include at least 2 objects!')
             sys.exit()
         self.list_of_objects = list_of_objects
     

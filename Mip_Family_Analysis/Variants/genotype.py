@@ -67,7 +67,7 @@ class Genotype(object):
         self.genotype_quality = float(GQ)
         self.phred_likelihoods = []
         if PL :
-            print PL
+            print(PL)
             for score in PL.split(','):
                 self.phred_likelihoods.append(int(score))
         
@@ -120,7 +120,7 @@ def main():
     nr_of_genotypes = 200000
     for i in range(nr_of_genotypes):
         Genotype('0/1')
-    print('Time to create %s genotypes: %s' % (str(nr_of_genotypes), str(datetime.now() - start)))
+    print(('Time to create %s genotypes: %s' % (str(nr_of_genotypes), str(datetime.now() - start))))
         
 
 

@@ -63,7 +63,7 @@ from Mip_Family_Analysis.Variants import genotype
 def check_genetic_models(variant_batch, family, verbose = False, phased=False ,proc_name = None):
     #A variant batch is a dictionary on the form {gene_id: {variant_id:variant_dict}}
     # Start by getting the genotypes for each variant:
-    individuals = family.individuals.values()
+    individuals = list(family.individuals.values())
     intervals = variant_batch.pop('haploblocks', {})
     for gene in variant_batch:
         for variant_id in variant_batch[gene]:

@@ -9,7 +9,7 @@ Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 
 import sys
 import os
-import StringIO
+import io
 from Mip_Family_Analysis.Variants import variant_parser
 
 class TestVariant(object):
